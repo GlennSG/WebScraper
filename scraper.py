@@ -31,7 +31,7 @@ class Scraper():
         #options.add_experimental_option("prefs",prefs)
         self.driver = Firefox()
 
-    def start(self):
+    def startScraper(self):
         self.driver.get("https://www.southtechhosting.com/SanJoseCity/CampaignDocsWebRetrieval/Search/SearchByElection.aspx")
         try:
             WebDriverWait(self.driver,10).until(EC.presence_of_element_located((By.ID,'ctl00_DefaultContent_ASPxRoundPanel1_btnFindFilers_CD')))
@@ -160,8 +160,57 @@ try:
 except TimeoutException:
     print("Loading took too long.")
 driver.find_element_by_xpath('//*[@id="ctl00_DefaultContent_ASPxRoundPanel1_btnFindFilers_CD"]').click()
-num_list = driver.find_elements_by_xpath('//a[@class="dxp-num"]')
-print(num_list)
+sleep(10)
+pg_nums = driver.find_elements_by_xpath('//a[@class="dxp-num"]')
+drivers = []
+drivers.append(driver)
+#next_button = driver.find_elements_by_xpath('//a[@class="dxp-button dxp-bi"]')
+# for num in pg_nums:
+#     pg_nums_list.append(num.text)
+# print(pg_nums_list)
+num = 1
+for i in range(0,len(pg_nums)):
+    driver = Firefox()
+    driver.get("https://www.southtechhosting.com/SanJoseCity/CampaignDocsWebRetrieval/Search/SearchByElection.aspx")
+    try:
+        WebDriverWait(driver,10).until(EC.presence_of_element_located((By.ID,'ctl00_DefaultContent_ASPxRoundPanel1_btnFindFilers_CD')))
+    except TimeoutException:
+        print("Loading took too long.")
+    driver.find_element_by_xpath('//*[@id="ctl00_DefaultContent_ASPxRoundPanel1_btnFindFilers_CD"]').click()
+    sleep(10)
+    driver.find_element_by_xpath('//a[contains(text(),"{}")]'.format(num+1)).click()
+    drivers.append(driver)
+    if num <= len(pg_nums):
+        num += 1
+    sleep(5)
+
+from multiprocessing.dummy import Pool
+
+def get_items(driver):
+    forms = driver.find_elements_by_xpath('//a[@class="dxbButton_Glass dxgvCommandColumnItem_Glass dxgv__cci dxbButtonSys"]')
+    forms[0].click()
+p = Pool(9)
+p.map(get_items,drivers)
+
+# for num in range(0,len(num_list)):
+    # next_button = driver.find_elements_by_xpath('//a[@class="dxp-button dxp-bi"]')
+    # if num == 0:
+    #     next_button[0].click()
+    # else:
+    #     next_button[1].click()
+    #page_num = driver.find_elements_by_xpath('//b[@class="dxp-num dxp-current"]')
+    # pgnum_buttons.append(page_num[0])
+    # sleep(5)
+# print(pgnum_buttons)
+# print(pgnum_buttons)
+# print(len(pgnum_buttons))
+# pgnum_buttons[0].click()
+#     driver.find_elements_by_xpath('//a[@class="dxp-button dxp-bi"]//')
+#     # num_list = driver.find_element_by_xpath('//a[@class="dxp-num"]')
+#     # print(num_list)
+#     if current < len(num_list):
+#         current += 1
+#     sleep(5)
 '''
 Grab all page links on bottom (9) and store in a list (inside Scraper() class)
 Have scraper class just pull info from each individual page (don't worry about while loops)
