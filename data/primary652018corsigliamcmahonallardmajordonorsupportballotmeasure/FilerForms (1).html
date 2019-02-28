@@ -1,0 +1,1036 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="ctl00_Head"><script type="text/javascript" language="javascript">var pageSettings = {"GenericErrorPageUrl":"https://www.southtechhosting.com/SanJoseCity/CampaignDocsWebRetrieval/Error/GenericErrorPage.aspx","LoginPageUrl":"https://www.southtechhosting.com/SanJoseCity/CampaignDocsWebRetrieval/Default.aspx","JavascriptErrorLoggerHandlerUrl":"https://www.southtechhosting.com/SanJoseCity/CampaignDocsWebRetrieval/JavascriptError.mvc.aspx","SiteUrl":"https://www.southtechhosting.com/SanJoseCity/CampaignDocsWebRetrieval/"};
+</script><link rel="stylesheet" type="text/css" href="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=0_1020-UZbYe" /><link rel="stylesheet" type="text/css" href="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=1_28-GZbYe" /><link rel="stylesheet" type="text/css" href="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=1_29-GZbYe" /><link rel="stylesheet" type="text/css" href="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=0_1022-UZbYe" /><link rel="stylesheet" type="text/css" href="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=1_10-GZbYe" /><link rel="stylesheet" type="text/css" href="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=0_898-UZbYe" /><link rel="stylesheet" type="text/css" href="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=0_903-UZbYe" /><link rel="stylesheet" type="text/css" href="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=0_905-UZbYe" /><link rel="stylesheet" type="text/css" href="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=0_896-UZbYe" /><link rel="stylesheet" type="text/css" href="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=1_9-GZbYe" /><link rel="stylesheet" type="text/css" href="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=1_8-GZbYe" /><link rel="stylesheet" type="text/css" href="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=1_23-GZbYe" /><link rel="stylesheet" type="text/css" href="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=1_3-GZbYe" /><link href="../App_Themes/Glass/Customize/AspxButton.css" type="text/css" rel="stylesheet" /><link href="../App_Themes/Glass/Default.css" type="text/css" rel="stylesheet" /><link href="../App_Themes/Glass/Editors/styles.css" type="text/css" rel="stylesheet" /><link href="../App_Themes/Glass/GridView/styles.css" type="text/css" rel="stylesheet" /><link href="../App_Themes/Glass/jquery-ui-1.8.7.custom.css" type="text/css" rel="stylesheet" /><link href="../App_Themes/Glass/StyleSheet.css" type="text/css" rel="stylesheet" /><link href="../App_Themes/Glass/StyleSheet_SkinedControlsExtender.css" type="text/css" rel="stylesheet" /><link href="../App_Themes/Glass/Web/styles.css" type="text/css" rel="stylesheet" /><meta http-equiv="Pragma" content="no-cache" /><meta http-equiv="Cache-Control" content="no-cache" /><meta http-equiv="Expires" content="-1" /><title>
+	View Filed Forms
+</title>
+   
+   <script src="/SanJoseCity/CampaignDocsWebRetrieval/Scripts/jquery-1.5.1.min.js" type="text/javascript"></script>
+  
+   
+    <!--Here comes dynamic script from page Init event-->
+    <script type="text/javascript" language="javascript">
+        var menuTips;
+        jQuery(document).ready(function () {
+            //            $.ajax({
+            //                type: "POST",
+            //                url: '/SanJoseCity/CampaignDocsWebRetrieval/Ajax/AjaxCaller.aspx/GetMenuTips',
+            //                data: '{data:1}',
+            //                contentType: "application/json; charset=utf-8",
+            //                dataType: "json",
+            //                success: function (msg) {
+            //                    menuTips = msg.d;
+            //                }
+            // 
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            if (isChrome)
+                $("#leftMenu").width('5%');
+            else
+                $("#leftMenu").width('187px');
+        });
+        // JScript File
+        function OnMoreInfoClick(element) {
+            if (popup != "undefined") {
+                popup.ShowAtElement(element);
+                var elementText = document.getElementById(element.id).innerHTML;
+
+                switch (elementText) {
+                    case "Filer's Name":
+                        SetMenuTipHeaderAndContent(1);
+                        break;
+                    case "Candidate's Last Name":
+                        SetMenuTipHeaderAndContent(2);
+                        break;
+                    case "Ballot Item":
+                        SetMenuTipHeaderAndContent(3);
+                        break;
+                    case "Election":
+                        SetMenuTipHeaderAndContent(4);
+                        break;
+                    case "Jurisdiction":
+                        SetMenuTipHeaderAndContent(5);
+                        break;
+                    case "District":
+                        SetMenuTipHeaderAndContent(6);
+                        break;
+                    case "Filed Form":
+                        SetMenuTipHeaderAndContent(7);
+                        break;
+                }
+            }
+        }
+
+        function SetMenuTipHeaderAndContent(menuItemId) {
+            var headerText = "";
+            var displayText = "";
+            try {
+                var ev = eval('(' + menuTips + ')');
+                $.each(ev, function () {
+                    if (this.MenuID == menuItemId) {
+                        headerText = this.Name;
+                        displayText = "<span>" + this.Message + "</span>";
+                    }
+                });
+
+                popup.SetHeaderText(headerText);
+                document.getElementById("PopUpDiv").innerHTML = displayText;
+            }
+            catch (err)
+            { }
+        }
+
+        function HidePopUp() {
+            if (popup != "undefined") {
+                popup.Hide();
+            }
+        }
+    </script>
+    <style>
+        a.MenuItemClass
+        {
+            cursor: hand !important;
+        }
+    </style>
+    
+<script id="ctl00_UserControlMultiplePerPageJS" type="text/javascript" language="javascript">var GetControlInstance = function(container, controlName) {
+                                                                return window[container + controlName];
+                                                            }</script><script id="ctl00_CustomPopupOuterJS" type="text/javascript" language="javascript" src="/SanJoseCity/CampaignDocsWebRetrieval/WebResource.axd?d=UUvAhV3pYm8zA-UHhxRlmnQ6SuFREumI_R4l3igVlQBaG4cIG6CZ3yIM6ciNrtjpcRgKFyIjcPJyfmQTgBuMKPBP5YtiS-rPZ8qZRhDkza9qjFkU936WDmBuzYjcPw9vS0l1eS379q28IDn4zt3viA2&amp;t=636802287840000000&amp;v=2.18.1212"></script><link href="../App_Themes/Glass/Customize/AspxButton.css" type="text/css" rel="stylesheet" /><link href="../App_Themes/Glass/Default.css" type="text/css" rel="stylesheet" /><link href="../App_Themes/Glass/Editors/styles.css" type="text/css" rel="stylesheet" /><link href="../App_Themes/Glass/GridView/styles.css" type="text/css" rel="stylesheet" /><link href="../App_Themes/Glass/jquery-ui-1.8.7.custom.css" type="text/css" rel="stylesheet" /><link href="../App_Themes/Glass/StyleSheet.css" type="text/css" rel="stylesheet" /><link href="../App_Themes/Glass/StyleSheet_SkinedControlsExtender.css" type="text/css" rel="stylesheet" /><link href="../App_Themes/Glass/Web/styles.css" type="text/css" rel="stylesheet" /><script id="ctl00_GlobalEntitiesJS" type="text/javascript" language="javascript" src="/SanJoseCity/CampaignDocsWebRetrieval/JScripts/JScript_GlobalEntities.js?v=2.18.1212"></script><style type="text/css">
+	/* <![CDATA[ */
+	#ctl00_roundpaneFormMainSearch_Menu1 img.icon { border-style:none;vertical-align:middle; }
+	#ctl00_roundpaneFormMainSearch_Menu1 img.separator { border-style:none;display:block; }
+	#ctl00_roundpaneFormMainSearch_Menu1 ul { list-style:none;margin:0;padding:0;width:auto; }
+	#ctl00_roundpaneFormMainSearch_Menu1 ul.dynamic { z-index:1; }
+	#ctl00_roundpaneFormMainSearch_Menu1 a { text-decoration:none;white-space:nowrap;display:block; }
+	#ctl00_roundpaneFormMainSearch_Menu1 a.static { padding:5px 0px 5px 0px;color:Black;text-decoration:none;border-style:none; }
+	#ctl00_roundpaneFormMainSearch_Menu1 a.popout { background-image:url("/SanJoseCity/CampaignDocsWebRetrieval/WebResource.axd?d=3nPyy2yqbP3bTvl4vXpjVU-A74kkUfhehMJrDgw-1psTfmU8a753XXEKcUYAhLk6eu-BKexL9wf0wgMRwEurxwpKV9hWq_Un8l0Oz22yemU1&t=636765211280000000");background-repeat:no-repeat;background-position:right center;padding-right:14px; }
+	#ctl00_roundpaneFormMainSearch_Menu1 a.static.selected { background-color:#95C3CF;text-decoration:none; }
+	#ctl00_roundpaneFormMainSearch_Menu1 a.static.highlighted { background-color:#95C3CF;font-weight:bold; }
+	/* ]]> */
+</style></head>
+<body>
+   <form name="aspnetForm" method="post" action="./FilerForms.aspx?y=0" id="aspnetForm">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/SanJoseCity/CampaignDocsWebRetrieval/WebResource.axd?d=YkvT-i5YApJcCRxILFolAoRAynsQDAJKSoHsHkk4s-ek7nBfKM61U6W6U395BzX5NE5Pp-L5eQfv9K-1C8me4L_qiiioPWQ2TvgB5E7BY001&amp;t=636765211280000000" type="text/javascript"></script>
+
+
+<script src="/SanJoseCity/CampaignDocsWebRetrieval/ScriptResource.axd?d=EAiUcPXqyAop33Rce2mtVH9N6aOyi9IAqeGWVJVUsT5anm1gsJvb9FUqhHjh9xoTc1vCSkWZhQoCCG-jo-smqdrnKRXbt9KKCJbr7ZZXU-puKSxy0Bwy0_gPO0jY45QyoHRynig1WfrWDLFzBy2qNw2&amp;t=29665526" type="text/javascript"></script>
+<script src="/SanJoseCity/CampaignDocsWebRetrieval/ScriptResource.axd?d=R3-IjTtPmsDwVxb-iSOe8oOLP1tLv0n2mWbPWydwjbzWgJu7tl009uazbpkmp9b20EojXAknMzLMVbjpqjs0h989LrtuW-kxQQLGBo4t9H8jMkXvbxQ80G3Vi3R5kWxXGHtZB6wjQ-py6P-tZT2wGwpgCnqSLBuGEX6TkrUzRO_afZ08_j8vvJDyUczHLNwR0&amp;t=ffffffff999c3159" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+if (typeof(Sys) === 'undefined') throw new Error('ASP.NET Ajax client-side framework failed to load.');
+//]]>
+</script>
+
+<script src="/SanJoseCity/CampaignDocsWebRetrieval/ScriptResource.axd?d=CnflNQpSsaulHy10mg8_wDKX7zCoD-U1jC0F2lgzpbnXuuQMrHY4-GdcYWxoRLH563gwL0tuknuWWv8AxmIz968dAVBnVF-cwU8XSxGKvGO4zjImdNQm8cY6hsaY_K4fjYBVPDRCfQFneOXxBWRyTwlsGMt_lLwaxanBW4gzcEMBiuzLpG2HtIXl8FTF7Ypc0&amp;t=ffffffff999c3159" type="text/javascript"></script>
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="FA79B04E" />
+	<input type="hidden" name="__VIEWSTATEENCRYPTED" id="__VIEWSTATEENCRYPTED" value="" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="PPP+DLv/u5RJcC1IVJLwX7e8sSUg89AhOmOkiWcy9voZ3JvdMY+Dp49IXY8W6XsyGNX5da39c0ar3wQYE7/rdf+0WCmtAKIbQcc3cLWYROAXTP1t8Br62dtD8jEW582EwdeJg7TMOvz5Ge5luSUDHdh5ueOXJnNMIhDyY3Tv1tGoOW8Y2U0hpzb4J8oRNmPLoT5cT3S/z+hHc3YL6RIuB9yNiCAGWlX7cahKr4lSbVrtrP1JceFgsr3ylaOb084hSfbz498YBQM9ZauZRUhA/3C8bUNbPJ0q7Hh4otQB+fEbDF/fa/hhrYX5Hv7HCsGIUWl5vez+Pv6pV00u4tseQeUDDsPyKY7m427lAHHefLuHh0nJGHUuEboWaen1HkIU/4u+0CtCDwjSzITvI/ymyULmhswYzHK79xd4ybtzSVI=" />
+</div>   
+        <script type="text/javascript" language="javascript" src="/SanJoseCity/CampaignDocsWebRetrieval/JScripts/JScript_GlobalEntities.js"></script>
+            
+        <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'aspnetForm', ['tctl00$DefaultContent$UpdatePanel2',''], [], [], 90, 'ctl00');
+//]]>
+</script>
+
+        
+        
+        &nbsp;
+              
+                
+        <table border="0" cellpadding="0" cellspacing="0" style="width:100%; height:100%; padding-left:50px; padding-right:50px;">            
+            <tr >
+                <td valign="top" style="width:100%; height:100%; white-space:nowrap; 
+                    text-align:center; vertical-align:middle;
+                     overflow:hidden; ">
+                    
+                    <table border="0" cellpadding="0" cellspacing="0" style="height: auto; width:100%;margin-right:auto;margin-left:auto">
+                        <tr>
+                            <td style="height: 5px;" colspan="2">
+                                <!--separation between header and main part-->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="height: 101px;" colspan="2">
+                                <!--Header-->
+                                <span id="ctl00_panelMasterTop">
+                                    
+<style type="text/css">
+       .linkMenu 
+       {
+           background: none!important;
+           border: 0!important; 
+           padding-top: 6px!important;
+           text-decoration: none!important;
+       }
+       .linkMenu a:hover,
+       .linkMenu a:hover *
+       {
+           text-decoration: underline!important;
+       }
+       .linkMenuItem,
+       .linkMenuItem span
+       {
+           padding: 0!important;
+           color:White!important;
+           font-family:Tahoma,Arial,Verdana,Arial AMU!important;
+           font-size: 12px!important;
+           font-weight:bold!important;
+           background: none!important;
+           border:0!important;
+       }
+       .linkMenuItem div
+       {
+           padding: 0!important;
+       }
+       .linkMenuItemSelected,
+       .linkMenuItemSelected span
+       {
+           text-decoration: underline!important;
+       }
+       .linkMenuSeparator
+       {
+           padding: 0 14px!important;
+       }
+       .linkMenuSeparator > *
+       {
+           background: #5386CB!important;
+           margin: 4px 0!important;
+           height: 0px!important;
+           width: 0px!important;
+       }
+</style>
+<table cellpadding="0" cellspacing="0" style="height: 101px; width:100%;">
+    <tr>
+        <td style="width: 187px; height: 101px; background-attachment: scroll; background-image: url(/SanJoseCity/CampaignDocsWebRetrieval/App_Themes/Glass/Images/Header/left.gif);
+            background-repeat: no-repeat; vertical-align: middle; text-align: right; background-position: right top;">
+            <div style="width: 187px; height: 101px; text-align:center;">
+                 <table style="width: 100%; height: 100%">
+                  <tr>
+                     <td style="text-align: center; vertical-align: middle; padding-right: 12px">
+                         <img id="ctl00_masterHeader_ImgLogo" src="../UserControls/WebSiteLogo.axd" style="height:81px;width:140px;border-width:0px;" />
+                     </td>
+                  </tr>
+                </table>
+            </div>
+        </td>
+        <td style="width: 100%; height: 101px; background-attachment: scroll; background-image: url(/SanJoseCity/CampaignDocsWebRetrieval/App_Themes/Glass/Images/Header/center.gif);
+            background-repeat: repeat-x; vertical-align: middle; text-align: center;">
+            
+            
+                <table border="0" cellpadding="0" cellspacing="0" style="height: 101px; width: 100%;">
+                    <tr>
+                        <td style="width: 100%; height: 72px;font-size: 20px; text-align:right;  padding-right:10px; padding-top: 0px;">     
+                            <table border="0" cellpadding="0" cellspacing="0" style="height: auto; width: 100%;border-style: none;vertical-align:top;">
+                                <tr>
+                                    <td style="text-align: left; white-space: nowrap; vertical-align:middle;">                                        
+                                        <img style="width:381px; height:27px;" width="381px"  height="21px" src="/SanJoseCity/CampaignDocsWebRetrieval/App_Themes/Glass/Images/Header/eRetrievalHeaderText.png" />
+                                    </td>
+                                    <td>
+                                        <div style="width: 20px; overflow:hidden;"></div>
+                                    </td>
+                                    <td style="text-align: right; white-space: normal; vertical-align:bottom;">
+                                        <span id="ctl00_masterHeader_lblHeaderText">City of San José</span>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="height: 3px;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="height: 26px; vertical-align: top; text-align: left; padding-left: 10px;">
+                                                      <div style="float: left">
+                               <script id="dxis_770262054" src="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=1_247-GZbYe" type="text/javascript"></script><script id="dxis_355211845" src="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=1_138-GZbYe" type="text/javascript"></script><script id="dxis_770333924" src="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=1_241-GZbYe" type="text/javascript"></script><script id="dxis_1717207248" src="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=1_164-GZbYe" type="text/javascript"></script><script id="dxis_771249569" src="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=1_141-GZbYe" type="text/javascript"></script><script id="dxis_355537258" src="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=1_135-GZbYe" type="text/javascript"></script><script id="dxis_771537065" src="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=1_149-GZbYe" type="text/javascript"></script><script id="dxis_1413296944" src="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=1_201-GZbYe" type="text/javascript"></script><script id="dxis_1486726955" src="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=1_187-GZbYe" type="text/javascript"></script><script id="dxis_1597680711" src="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=1_196-GZbYe" type="text/javascript"></script><script id="dxis_1597617281" src="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=1_190-GZbYe" type="text/javascript"></script><script id="dxis_1597579364" src="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=1_195-GZbYe" type="text/javascript"></script><script id="dxis_1717000590" src="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=1_162-GZbYe" type="text/javascript"></script><script id="dxis_1828131527" src="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=1_170-GZbYe" type="text/javascript"></script><script id="dxis_882308892" src="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=1_151-GZbYe" type="text/javascript"></script><script id="dxis_356794861" src="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=1_233-GZbYe" type="text/javascript"></script><script id="dxis_356587947" src="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=1_231-GZbYe" type="text/javascript"></script><script id="dxis_467681095" src="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=1_220-GZbYe" type="text/javascript"></script><div class="dxmLite_Glass dxm-ltr">
+	<div class="dxm-main dxm-horizontal linkMenu" id="ctl00_masterHeader_ASPxMenu1">
+		<ul class="dx dxm-t dxm-image-l dxm-noImages">
+			<li class="dxm-item linkMenuItem"><div class="dxm-content dxm-hasText" style="vertical-align:middle;">
+				<a title="Home" class="dx" href="../Default.aspx"><span class="dx-vam">Home</span></a>
+			</div></li>
+		</ul>
+	</div><b class="dx-clear"></b>
+</div>
+                            </div>
+                            <div style="float: right; margin: 5px 0px 0px 0px;">
+                                
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+        </td>
+        <td style="width: 8px; height: 101px; background-attachment: scroll; background-image: url(/SanJoseCity/CampaignDocsWebRetrieval/App_Themes/Glass/Images/Header/right.gif);
+            background-repeat: no-repeat; vertical-align: middle; text-align: left;">
+            <div style="width: 8px; height: 101px;">
+            </div>
+        </td>
+    </tr>
+</table>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="height: 5px;" colspan="2">
+                                <!--separation between header and main part-->
+                            </td>
+                        </tr>
+                        <tr >   
+                            <!--Navigation menu Part-->
+                            <td id="leftMenu" valign="top" style="padding-right: 2px; padding-left: 2px; padding-bottom: 2px;
+                                margin: 2px; padding-top: 2px; height:auto; white-space:normal;" align="left">
+                                <table id="ctl00_MenuTable">
+	<tr>
+		<td>
+                                            <table class="dxrpControl_Glass dxrpWithoutHeader_Glass dxrp-noCollapsing" cellspacing="0" cellpadding="0" id="ctl00_roundpaneFormMainSearch" border="0" style="width:170px;border-collapse:collapse;border-collapse:separate;border-radius:5px;">
+			<tr class="dxrpCR">
+				<td id="ctl00_roundpaneFormMainSearch_RPC" class="dxrp dxrpcontent dx-borderBox" style="background-color:#EBF2F4;width:100%;border-radius:5px;"> 
+                                                <table border="0" cellpadding="0" cellspacing="0" style="width:auto; height:auto; margin:0px; padding:0px;">                    
+                                                    <tr>
+                                                        <td>
+                                                            <b><u>Search By</u></b><br /><br />
+                                                            <a href="#ctl00_roundpaneFormMainSearch_Menu1_SkipLink"><img alt="Skip Navigation Links" src="/SanJoseCity/CampaignDocsWebRetrieval/WebResource.axd?d=JXKdGnFWRh0zyveaYlTYIxirbLAlcnAmWzuvLEabMPn9S04Ra698GeB_ySHWJTXHIdsLwa7N-uTRaHBXb_ddDtXxFw2GlNMrDAdjOZbISZ81&amp;t=636765211280000000" width="0" height="0" style="border-width:0px;" /></a><div id="ctl00_roundpaneFormMainSearch_Menu1">
+					<ul class="level1">
+						<li><a class="level1 MenuItemClass" href="#" onclick="__doPostBack(&#39;ctl00$roundpaneFormMainSearch$Menu1&#39;,&#39;SearchByFilerName&#39;)">
+                                                                <span id="ctl00_roundpaneFormMainSearch_Menu1_ctl00_Label1" style="display:inline-block;height:20px;">Filer's Name</span> <!--onmouseover="OnMoreInfoClick(this)" onmouseout="HidePopUp();"-->
+                                                             </a></li><li><a class="level1 MenuItemClass" href="#" onclick="__doPostBack(&#39;ctl00$roundpaneFormMainSearch$Menu1&#39;,&#39;SearchByCandidateName&#39;)">
+                                                                <span id="ctl00_roundpaneFormMainSearch_Menu1_ctl01_Label1" style="display:inline-block;height:20px;">Candidate's Last Name</span> <!--onmouseover="OnMoreInfoClick(this)" onmouseout="HidePopUp();"-->
+                                                             </a></li><li><a class="level1 MenuItemClass" href="#" onclick="__doPostBack(&#39;ctl00$roundpaneFormMainSearch$Menu1&#39;,&#39;SearchByBallotItem&#39;)">
+                                                                <span id="ctl00_roundpaneFormMainSearch_Menu1_ctl02_Label1" style="display:inline-block;height:20px;">Ballot Item</span> <!--onmouseover="OnMoreInfoClick(this)" onmouseout="HidePopUp();"-->
+                                                             </a></li><li><a class="level1 MenuItemClass" href="#" onclick="__doPostBack(&#39;ctl00$roundpaneFormMainSearch$Menu1&#39;,&#39;SearchByElection&#39;)">
+                                                                <span id="ctl00_roundpaneFormMainSearch_Menu1_ctl03_Label1" style="display:inline-block;height:20px;">Election</span> <!--onmouseover="OnMoreInfoClick(this)" onmouseout="HidePopUp();"-->
+                                                             </a></li><li><a class="level1 MenuItemClass" href="#" onclick="__doPostBack(&#39;ctl00$roundpaneFormMainSearch$Menu1&#39;,&#39;SearchByJurisdiction&#39;)">
+                                                                <span id="ctl00_roundpaneFormMainSearch_Menu1_ctl04_Label1" style="display:inline-block;height:20px;">Jurisdiction</span> <!--onmouseover="OnMoreInfoClick(this)" onmouseout="HidePopUp();"-->
+                                                             </a></li><li><a class="level1 MenuItemClass" href="#" onclick="__doPostBack(&#39;ctl00$roundpaneFormMainSearch$Menu1&#39;,&#39;SearchByDistrict&#39;)">
+                                                                <span id="ctl00_roundpaneFormMainSearch_Menu1_ctl05_Label1" style="display:inline-block;height:20px;">District</span> <!--onmouseover="OnMoreInfoClick(this)" onmouseout="HidePopUp();"-->
+                                                             </a></li><li><a class="level1 MenuItemClass" href="#" onclick="__doPostBack(&#39;ctl00$roundpaneFormMainSearch$Menu1&#39;,&#39;SearchByFiledForm&#39;)">
+                                                                <span id="ctl00_roundpaneFormMainSearch_Menu1_ctl06_Label1" style="display:inline-block;height:20px;">Filed Form</span> <!--onmouseover="OnMoreInfoClick(this)" onmouseout="HidePopUp();"-->
+                                                             </a></li><li><a class="level1 MenuItemClass" href="#" onclick="__doPostBack(&#39;ctl00$roundpaneFormMainSearch$Menu1&#39;,&#39;SearchByAdvanced&#39;)">
+                                                                <span id="ctl00_roundpaneFormMainSearch_Menu1_ctl07_Label1" style="display:inline-block;height:20px;">Advanced Search</span> <!--onmouseover="OnMoreInfoClick(this)" onmouseout="HidePopUp();"-->
+                                                             </a></li>
+					</ul>
+				</div><a id="ctl00_roundpaneFormMainSearch_Menu1_SkipLink"></a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+			</tr>
+		</table>                                      
+                                        </td>
+	</tr>
+</table>
+ 
+                                
+                               
+                             <!--Navigation menu Part-->
+                            </td>
+                            <td valign="top" style="padding-right: 2px; padding-left: 2px; padding-bottom: 2px;
+                                margin: 2px; padding-top: 2px; width: 100%; height:auto; white-space:normal;" align="center">
+                                
+
+<div id="ctl00_DefaultContent_UpdatePanel2">
+	
+ <div style="text-align:left;width:100%; "> 
+
+                     <table border="0" cellpadding="0" cellspacing="0" style="width:auto; height:auto; margin:0px; padding:0px;">                    
+                        <tr >
+                            <td style="text-align:left;">
+                                <span style="font-size:12px; font-weight:bold;">
+                                       Filer:
+                                </span>                                                                                               
+                            </td>
+                
+                            <td><div style=" width:5px;overflow:hidden;"></div></td>
+                    
+                            <td style="text-align:left;">                                                
+                                <span style="font-size:12px; font-weight:bold;">
+                                    <span class="dxeBase_Glass" id="ctl00_DefaultContent_lblFilerNames">Santa Clara County Government Attorneys&#39; Association PAC</span>  
+                                </span>
+                            </td>
+                         </tr>
+                    </table> 
+            <br /><br />
+           
+            <span class="" style="font-size:12px; font-weight:bold;">
+                   Filed Forms:
+            </span>               
+            <br />                   
+            <table class="dxgvControl_Glass dxgv" cellspacing="0" cellpadding="0" id="ctl00_DefaultContent_gridFilingForms" border="0" style="width:100%;border-collapse:collapse;border-collapse:separate;">
+		<tr>
+			<td><table id="ctl00_DefaultContent_gridFilingForms_DXMainTable" class="dxgvTable_Glass" cellspacing="0" cellpadding="0" onclick="ASPx.GTableClick(&#39;ctl00_DefaultContent_gridFilingForms&#39;, event);" ondblclick="ASPx.GVTableDblClick(&#39;ctl00_DefaultContent_gridFilingForms&#39;, event);" oncontextmenu="return ASPx.GVContextMenu(&#39;ctl00_DefaultContent_gridFilingForms&#39;,event);" border="0" style="width:100%;border-collapse:collapse;empty-cells:show;">
+				<tr id="ctl00_DefaultContent_gridFilingForms_DXHeadersRow0">
+					<td id="ctl00_DefaultContent_gridFilingForms_col0" class="dxgvHeader_Glass" style="width:10%;border-top-width:0px;border-left-width:0px;"><table cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:collapse;">
+						<tr>
+							<td>Form Type</td><td style="width:1px;text-align:right;"><span class="dx-vam">&nbsp;</span></td>
+						</tr>
+					</table></td><td id="ctl00_DefaultContent_gridFilingForms_col1" class="dxgvHeader_Glass" style="width:35%;border-top-width:0px;border-left-width:0px;"><table cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:collapse;">
+						<tr>
+							<td>Form Description</td><td style="width:1px;text-align:right;"><span class="dx-vam">&nbsp;</span></td>
+						</tr>
+					</table></td><td id="ctl00_DefaultContent_gridFilingForms_col2" class="dxgvHeader_Glass" style="width:10%;border-top-width:0px;border-left-width:0px;"><table cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:collapse;">
+						<tr>
+							<td>Filing Date</td><td style="width:1px;text-align:right;"><span class="dx-vam">&nbsp;</span><img class="dx-vam" src="../App_Themes/Glass/GridView/gvHeaderSortDown.gif" alt="Descending" style="margin-left:5px;" /></td>
+						</tr>
+					</table></td><td id="ctl00_DefaultContent_gridFilingForms_col3" class="dxgvHeader_Glass" style="width:15%;border-top-width:0px;border-left-width:0px;"><table cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:collapse;">
+						<tr>
+							<td>Filing Period</td><td style="width:1px;text-align:right;"><span class="dx-vam">&nbsp;</span><img class="dx-vam" src="../App_Themes/Glass/GridView/gvHeaderSortDown.gif" alt="Descending" style="margin-left:5px;" /></td>
+						</tr>
+					</table></td><td id="ctl00_DefaultContent_gridFilingForms_col4" class="dxgvHeader_Glass" style="width:4%;border-top-width:0px;border-left-width:0px;cursor:default;"><table cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:collapse;">
+						<tr>
+							<td>View Form</td><td style="width:1px;text-align:right;"><span class="dx-vam">&nbsp;</span></td>
+						</tr>
+					</table></td><td id="ctl00_DefaultContent_gridFilingForms_col5" class="dxgvHeader_Glass" style="width:4%;border-top-width:0px;border-left-width:0px;border-right-width:0px;cursor:default;"><table cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:collapse;">
+						<tr>
+							<td>Export</td><td style="width:1px;text-align:right;"><span class="dx-vam">&nbsp;</span></td>
+						</tr>
+					</table></td>
+				</tr><tr id="ctl00_DefaultContent_gridFilingForms_DXDataRow0" class="dxgvDataRow_Glass">
+					<td class="dx-wrap dxgv" align="left">496</td><td class="dx-wrap dxgv" align="left">24-hour Independent Expenditure Report</td><td class="dx-wrap dxgv" align="center">10/28/2018</td><td class="dx-wrap dxgv" align="center">2018</td><td class="dxgvCommandColumn_Glass dxgv" align="center"><a class="dxbButton_Glass dxgvCommandColumnItem_Glass dxgv__cci dxbButtonSys" data-args="[[&#39;CustomButton&#39;,&#39;CustomBtnID&#39;,0],1]" id="ctl00_DefaultContent_gridFilingForms_DXCBtn0"><img title="View Form" class="dx-vam" src="../Images/pdf.jpg" alt="View Form" style="height:16px;width:16px;" /></a><script id="dxss_604340268" type="text/javascript">
+<!--
+ASPx.AddDisabledItems('ctl00_DefaultContent_gridFilingForms_DXCBtn0',[[['dxbDisabled_Glass'],[''],[''],['','TC']]]);
+
+//-->
+</script></td><td class="dxgvCommandColumn_Glass dxgv" align="center" style="border-right-width:0px;">&nbsp;</td>
+				</tr><tr id="ctl00_DefaultContent_gridFilingForms_DXDataRow1" class="dxgvDataRow_Glass">
+					<td class="dx-wrap dxgv" align="left">496</td><td class="dx-wrap dxgv" align="left">24-hour Independent Expenditure Report</td><td class="dx-wrap dxgv" align="center">10/26/2018</td><td class="dx-wrap dxgv" align="center">2018</td><td class="dxgvCommandColumn_Glass dxgv" align="center"><a class="dxbButton_Glass dxgvCommandColumnItem_Glass dxgv__cci dxbButtonSys" data-args="[[&#39;CustomButton&#39;,&#39;CustomBtnID&#39;,1],1]" id="ctl00_DefaultContent_gridFilingForms_DXCBtn1"><img title="View Form" class="dx-vam" src="../Images/pdf.jpg" alt="View Form" style="height:16px;width:16px;" /></a><script id="dxss_41445683" type="text/javascript">
+<!--
+ASPx.AddDisabledItems('ctl00_DefaultContent_gridFilingForms_DXCBtn1',[[['dxbDisabled_Glass'],[''],[''],['','TC']]]);
+
+//-->
+</script></td><td class="dxgvCommandColumn_Glass dxgv" align="center" style="border-right-width:0px;">&nbsp;</td>
+				</tr><tr id="ctl00_DefaultContent_gridFilingForms_DXDataRow2" class="dxgvDataRow_Glass">
+					<td class="dx-wrap dxgv" align="left">496</td><td class="dx-wrap dxgv" align="left">24-hour Independent Expenditure Report</td><td class="dx-wrap dxgv" align="center">10/23/2018</td><td class="dx-wrap dxgv" align="center">2018</td><td class="dxgvCommandColumn_Glass dxgv" align="center"><a class="dxbButton_Glass dxgvCommandColumnItem_Glass dxgv__cci dxbButtonSys" data-args="[[&#39;CustomButton&#39;,&#39;CustomBtnID&#39;,2],1]" id="ctl00_DefaultContent_gridFilingForms_DXCBtn2"><img title="View Form" class="dx-vam" src="../Images/pdf.jpg" alt="View Form" style="height:16px;width:16px;" /></a><script id="dxss_216898926" type="text/javascript">
+<!--
+ASPx.AddDisabledItems('ctl00_DefaultContent_gridFilingForms_DXCBtn2',[[['dxbDisabled_Glass'],[''],[''],['','TC']]]);
+
+//-->
+</script></td><td class="dxgvCommandColumn_Glass dxgv" align="center" style="border-right-width:0px;">&nbsp;</td>
+				</tr><tr id="ctl00_DefaultContent_gridFilingForms_DXDataRow3" class="dxgvDataRow_Glass">
+					<td class="dx-wrap dxgv" align="left">496</td><td class="dx-wrap dxgv" align="left">24-hour Independent Expenditure Report</td><td class="dx-wrap dxgv" align="center">10/23/2018</td><td class="dx-wrap dxgv" align="center">2018</td><td class="dxgvCommandColumn_Glass dxgv" align="center"><a class="dxbButton_Glass dxgvCommandColumnItem_Glass dxgv__cci dxbButtonSys" data-args="[[&#39;CustomButton&#39;,&#39;CustomBtnID&#39;,3],1]" id="ctl00_DefaultContent_gridFilingForms_DXCBtn3"><img title="View Form" class="dx-vam" src="../Images/pdf.jpg" alt="View Form" style="height:16px;width:16px;" /></a><script id="dxss_154531087" type="text/javascript">
+<!--
+ASPx.AddDisabledItems('ctl00_DefaultContent_gridFilingForms_DXCBtn3',[[['dxbDisabled_Glass'],[''],[''],['','TC']]]);
+
+//-->
+</script></td><td class="dxgvCommandColumn_Glass dxgv" align="center" style="border-right-width:0px;">&nbsp;</td>
+				</tr><tr id="ctl00_DefaultContent_gridFilingForms_DXDataRow4" class="dxgvDataRow_Glass">
+					<td class="dx-wrap dxgv" align="left" style="border-bottom-width:0px;">460</td><td class="dx-wrap dxgv" align="left" style="border-bottom-width:0px;">Recipient Committee Campaign Statement</td><td class="dx-wrap dxgv" align="center" style="border-bottom-width:0px;">1/31/2018</td><td class="dx-wrap dxgv" align="center" style="border-bottom-width:0px;">7/1/2017 - 12/31/2017</td><td class="dxgvCommandColumn_Glass dxgv" align="center" style="border-bottom-width:0px;"><a class="dxbButton_Glass dxgvCommandColumnItem_Glass dxgv__cci dxbButtonSys" data-args="[[&#39;CustomButton&#39;,&#39;CustomBtnID&#39;,4],1]" id="ctl00_DefaultContent_gridFilingForms_DXCBtn4"><img title="View Form" class="dx-vam" src="../Images/pdf.jpg" alt="View Form" style="height:16px;width:16px;" /></a><script id="dxss_649445552" type="text/javascript">
+<!--
+ASPx.AddDisabledItems('ctl00_DefaultContent_gridFilingForms_DXCBtn4',[[['dxbDisabled_Glass'],[''],[''],['','TC']]]);
+
+//-->
+</script></td><td class="dxgvCommandColumn_Glass dxgv" align="center" style="border-right-width:0px;border-bottom-width:0px;"><a class="dxbButton_Glass dxgvCommandColumnItem_Glass dxgv__cci dxbButtonSys" data-args="[[&#39;CustomButton&#39;,&#39;BtnExportSelected&#39;,4],1]" id="ctl00_DefaultContent_gridFilingForms_DXCBtn5"><img title="Export Transaction Details To Excel" class="dx-vam" src="../Images/excell.jpg" alt="Export Transaction Details To Excel" style="height:16px;width:16px;" /></a><script id="dxss_3659601" type="text/javascript">
+<!--
+ASPx.AddDisabledItems('ctl00_DefaultContent_gridFilingForms_DXCBtn5',[[['dxbDisabled_Glass'],[''],[''],['','TC']]]);
+
+//-->
+</script></td>
+				</tr>
+			</table><table id="ctl00_DefaultContent_gridFilingForms_LP" class="dxgvLoadingPanel_Glass" cellspacing="0" cellpadding="0" border="0" style="background-color:Transparent;border-width:0px;border-collapse:collapse;left:0px;top:0px;z-index:30000;display:none;">
+				<tr>
+					<td class="dx" style="padding-left:0px;padding-right:0px;padding-top:0px;padding-bottom:0px;"><img class="dxlp-imgPosLeft" src="../App_Themes/Glass/Images/progress/Loading2.gif" alt="" align="middle" /></td>
+				</tr>
+			</table><div id="ctl00_DefaultContent_gridFilingForms_LD" class="dxgvLoadingDiv_Glass" style="display:none;z-index:29999;position:absolute;">
+
+			</div><img id="ctl00_DefaultContent_gridFilingForms_IADD" src="../App_Themes/Glass/GridView/gvDragAndDropArrowDown.gif" alt="|" style="position:absolute;visibility:hidden;top:-100px;" /><img id="ctl00_DefaultContent_gridFilingForms_IADU" src="../App_Themes/Glass/GridView/gvDragAndDropArrowUp.gif" alt="|" style="position:absolute;visibility:hidden;top:-100px;" /><img id="ctl00_DefaultContent_gridFilingForms_IADL" src="../App_Themes/Glass/GridView/gvDragAndDropArrowLeft.gif" alt="|" style="position:absolute;visibility:hidden;top:-100px;" /><img id="ctl00_DefaultContent_gridFilingForms_IADR" src="../App_Themes/Glass/GridView/gvDragAndDropArrowRight.gif" alt="|" style="position:absolute;visibility:hidden;top:-100px;" /><img id="ctl00_DefaultContent_gridFilingForms_IDHF" src="../App_Themes/Glass/GridView/gvDragAndDropHideColumn.gif" alt="Hide" style="position:absolute;visibility:hidden;top:-100px;" /></td>
+		</tr>
+	</table><script id="dxss_1628657334" type="text/javascript">
+<!--
+
+var dxo = new ASPxClientGridView('ctl00_DefaultContent_gridFilingForms');
+dxo.InitGlobalVariable('gridFilingForms');
+dxo.SetProperties({
+	'callBack':function(arg) { WebForm_DoCallback('ctl00$DefaultContent$gridFilingForms',arg,ASPx.Callback,'ctl00_DefaultContent_gridFilingForms',ASPx.CallbackError,true); },
+	'uniqueID':'ctl00$DefaultContent$gridFilingForms',
+	'stateObject':{
+		'keys':[],
+		'callbackState':'laBHcrhrseG/hFtjZYu9psd5/sPWDGpcOO3oZymW7Iy+MDLinmqDq14MjPOcHUWxTPRDUEL5tRMoVJ8+ahN+sxH3qzmz2sx373TOwr1ji9pt6kXjfl57Dv3eyfFIeVtRXZ/5Alji3ENsaeAsf/ZS0MCyBExD81foWTkBg6dFlnVnqXibFBaznGzSqKgRpnnaIEDn78USdHSVnibMgTyC/JosPL0AKclMKOLofpQli2kkhDl+Z9id+4dNNQex09JNfWFxTZ/T/rRRdplkJrzYTlrV5UVS5EseVTEBFgeY3k7UHjHG+mIzV+bUXD7uiWhFgUnjWTHC8nieoU5Mn8kKxnmAaSif02pm+tl9Uyg1LHRdwvsLx4YG5mfwpmrjExsaGGI7v2wu3OqGqTW5s/FatfvmQo6ktsDzhQXG4aMJ3oGRVSM8BT8agYCHu2vfdz/Mdf7khLzdaeu1K9zCVxzvIC/HNX5wHBrTc+8F6TUgH3lVsWaxvBZl5Qi9kRr7JeDvX6YC2Uu2DAkbTC49KZRnt+TYqoGiDEIyfitU0PVD9Q7Qm1OP+UPNearKctfrcmz5yStAYcERFbvSxsGqMD8/ffuc/DG1Yf/n8ofqjfIjjaGUR7S9ii+txVicgeHV3FrzAHAS4JxwWOPlIQKnDO/h3auQ299F4NyO3sWQvbPzu2LjW1/KY/WvZuFptywJrGdGh04gAjyz6+t+U5u4XAGOhCLtAxnZ9vS6/JvfOtzSUByvooYsePG65TXK+FREAEh1RwkXmzNfChTH+0MvIhCCQ/A05YBG3kRHSW7K+svJH18Yp8mkaP8p2V+O6Ti5aEoqhHNri24w5U2bDt3I9XfVFVkNAeQt8mAoZ+2KNgUcHHJyGHeY/8yGhRbSLIe6UUjfPVCg2NjUZA6T+ggwqc9YslzPzX+09qH1u5KyRtu3QDiNOvosULtAUhni1l+rvGWofxsZe1t79XRW+CX1OooZiNDNvxcN896C/wmoNQGiSP8ZqWqQLF1hpca6L4UvrHt+eE1O4yuTCEgFGgDsQzdDL2fBuC38p/otcD9ia13Qgj2Fv1sG99RS0fn/uscHSBQya46YohbH+ibDK3L+65q7eCEcAPKmz5qBAaXaDdSeZtY=',
+		'selection':''
+	},
+	'callBacksEnabled':false,
+	'pageRowCount':5,
+	'pageRowSize':10,
+	'pageIndex':-1,
+	'pageCount':1,
+	'selectedWithoutPageRowCount':0,
+	'visibleStartIndex':0,
+	'focusedRowIndex':-1,
+	'allowFocusedRow':false,
+	'allowSelectByItemClick':false,
+	'allowSelectSingleRowOnly':false,
+	'callbackOnFocusedRowChanged':false,
+	'callbackOnSelectionChanged':false,
+	'editState':0,
+	'editItemVisibleIndex':-1,
+	'searchPanelFilter':'',
+	'allowDelete':true,
+	'allowEdit':true,
+	'allowInsert':true,
+	'columnProp':[[0,,,'FormType',,,0,,,,,0,0],[1,,,'Description',,,1,,,,,0,0],[2,,,'FilingDate',,1,2,,,,,0,0],[3,,,'Period',,,3,,,,,0,0],[4,,,,0,,8,,1,,,0,0],[5,,,,0,,9,,1,,,0,0]],
+	'editMode':2,
+	'indentColumnCount':0,
+	'allowChangeColumnHierarchy':false,
+	'allowMultiColumnAutoFilter':false
+});
+dxo.SetEvents({
+	'ColumnSorting':function(s,e){
+                        //e.processOnServer = false;                                        
+                        //e.cancel = true;                            
+                    },
+	'CustomButtonClick':function(s, e) {
+	                        if(e.buttonID == 'BtnExportSelected'){
+                                document.getElementById('hdn_visibleIndex').value = e.visibleIndex;
+                                BtnTemp.DoClick();
+                                e.processOnServer = false;                                        
+                                e.cancel = true;
+                                return false;   
+                            }
+                            e.processOnServer = true;                                        
+                            e.cancel = false;
+                            return true;
+                        }
+});
+dxo.AfterCreate();
+
+//-->
+</script><script id="dxss_2025703026" type="text/javascript">
+<!--
+ASPxClientGridBase.PostponeInitialize('ctl00_DefaultContent_gridFilingForms',({
+	'commandButtonIDs':['ctl00_DefaultContent_gridFilingForms_DXCBtn0','ctl00_DefaultContent_gridFilingForms_DXCBtn1','ctl00_DefaultContent_gridFilingForms_DXCBtn2','ctl00_DefaultContent_gridFilingForms_DXCBtn3','ctl00_DefaultContent_gridFilingForms_DXCBtn4','ctl00_DefaultContent_gridFilingForms_DXCBtn5'],
+	'styleInfo':{
+		'sel':{'css':'dxgvSelectedRow_Glass'},
+		'fi':{'css':'dxgvFocusedRow_Glass'},
+		'ei':'<tr class="dxgvEditingErrorRow_Glass">\r\n\t<td class="dxgv" data-colSpan="6" style="border-right-width:0px;"></td>\r\n</tr>',
+		'fc':{'css':'dxgvFocusedCell_Glass'},
+		'bec':{'css':'dxgvBatchEditCell_Glass dx-wrap dxgv'},
+		'bemc':{'css':'dxgvBatchEditModifiedCell_Glass dx-wrap dxgv'},
+		'bemergmc':{'css':'dxgvBatchEditModifiedCell_Glass dxgvBatchEditCell_Glass dx-wrap dxgv'},
+		'bedi':{'css':'dxgvBatchEditDeletedItem_Glass dxgv'},
+		'fgi':{'css':'dxgvFocusedGroupRow_Glass'}
+	}
+}))
+//-->
+</script>                                 
+            
+            
+            <div id="ctl00_DefaultContent_popupCantContinueDialog_PW-1" class="dxpcLite_Glass dxpclW" style="height:130px;width:250px;cursor:default;z-index:10000;display:none;visibility:hidden;">
+		<div class="dxpc-mainDiv dxpc-shadow">
+			<div class="dxpc-header dxpc-withBtn" style="padding-left:10px;padding-right:6px;padding-top:1px;">
+				<div class="dxpc-closeBtn">
+					<img src="../App_Themes/Glass/Web/pcCloseButton.png" alt="Close" style="height:17px;width:17px;" />
+				</div><div class="dxpc-headerContent">
+					<span class="dxpc-headerText dx-vam">CampaignDocs</span>
+				</div><b class="dx-clear"></b>
+			</div><div class="dxpc-contentWrapper">
+				<div class="dxpc-content" style="text-align:Center;">
+					
+                    <div id="ctl00_DefaultContent_popupCantContinueDialog_Panel3" style="height:100%;width:100%;text-align:left;">
+						
+                      <div id="ctl00_DefaultContent_popupCantContinueDialog_msgDiv" style="width:100%; padding-bottom:5px;">                                    
+                        
+                      </div>
+                        <br />
+                                                            
+                        <table width="100%">
+                            <tr>
+                                <td align="center">
+                                    <div class="dxbButton dxbButtonSys dxbTSys" id="ctl00_DefaultContent_popupCantContinueDialog_ButtonCantContineOK" style="width:70px;-webkit-user-select:none;">
+							<div class="dxb">
+								<div class="dxb-hbc">
+									<input id="ctl00_DefaultContent_popupCantContinueDialog_ButtonCantContineOK_I" class="dxb-hb" value="OK" type="submit" name="ctl00$DefaultContent$popupCantContinueDialog$ButtonCantContineOK" readonly="readonly" />
+								</div><span class="dx-vam">OK</span>
+							</div>
+						</div><script id="dxss_187262221" type="text/javascript">
+<!--
+ASPx.AddHoverItems('ctl00_DefaultContent_popupCantContinueDialog_ButtonCantContineOK',[[['dxbButtonHover'],[''],[''],['','TC']]]);
+ASPx.AddPressedItems('ctl00_DefaultContent_popupCantContinueDialog_ButtonCantContineOK',[[['dxbButtonPressed'],[''],[''],['','TC']]]);
+ASPx.AddDisabledItems('ctl00_DefaultContent_popupCantContinueDialog_ButtonCantContineOK',[[['dxbDisabled'],[''],[''],['','TC']]]);
+ASPx.AddSelectedItems('ctl00_DefaultContent_popupCantContinueDialog_ButtonCantContineOK',[[['dxbf'],[''],['CD']]]);
+
+var dxo = new ASPxClientButton('ctl00_DefaultContent_popupCantContinueDialog_ButtonCantContineOK');
+dxo.InitGlobalVariable('ctl00_DefaultContent_popupCantContinueDialog_ButtonCantContineOK');
+dxo.SetProperties({'uniqueID':'ctl00$DefaultContent$popupCantContinueDialog$ButtonCantContineOK'});
+dxo.SetEvents({
+	'Click':function(s,e){if (preventDoubleSubmiting(e)){return;}popupCantContinueDialog.Hide();return false;}
+});
+dxo.AfterCreate();
+
+//-->
+</script>
+                                </td>
+                            </tr>
+                        </table>                            
+                    
+					</div>
+                
+                
+				</div>
+			</div>
+		</div>
+	</div><div id="ctl00_DefaultContent_popupCantContinueDialog_DXPWMB-1" class="dxpcModalBackLite_Glass" style="z-index:9999;">
+
+	</div><table id="ctl00_DefaultContent_popupCantContinueDialog_LP" class="dxpcLoadingPanel_Glass dxlpLoadingPanel_Glass" cellspacing="0" cellpadding="0" border="0" style="border-collapse:collapse;left:0px;top:0px;z-index:30000;display:none;">
+		<tr>
+			<td class="dx" style="padding-right:0px;"><img class="dxlp-imgPosLeft" src="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=0_984-UZbYe" alt="" align="middle" /></td><td class="dx" style="padding-left:0px;"><span id="ctl00_DefaultContent_popupCantContinueDialog_TL">Loading&hellip;</span></td>
+		</tr>
+	</table><div id="ctl00_DefaultContent_popupCantContinueDialog_LD" class="dxpcLoadingDiv_Glass dxlpLoadingDiv_Glass dx-ft" style="left:0px;top:0px;z-index:29999;display:none;position:absolute;">
+
+	</div><script id="dxss_409295900" type="text/javascript">
+<!--
+ASPx.AddHoverItems('ctl00_DefaultContent_popupCantContinueDialog',[[['dxpc-closeBtnHover'],[''],['HCB-1']]]);
+
+var dxo = new ASPxClientPopupControl('ctl00_DefaultContent_popupCantContinueDialog');
+dxo.InitGlobalVariable('popupCantContinueDialog');
+dxo.SetProperties({
+	'callBack':function(arg) { WebForm_DoCallback('ctl00$DefaultContent$popupCantContinueDialog',arg,ASPx.Callback,'ctl00_DefaultContent_popupCantContinueDialog',ASPx.CallbackError,true); },
+	'uniqueID':'ctl00$DefaultContent$popupCantContinueDialog',
+	'popupAnimationType':'fade',
+	'closeAction':'CloseButton',
+	'popupHorizontalAlign':'WindowCenter',
+	'popupVerticalAlign':'WindowCenter',
+	'isPopupPositionCorrectionOn':false,
+	'width':250,
+	'widthFromServer':true,
+	'height':130
+});
+dxo.AfterCreate();
+
+//-->
+</script>
+            <!-- Popups end -->
+                            
+            <br />
+            <div title="Back to Filer Search page" class="dxbButton dxbButtonSys dxbTSys" id="ctl00_DefaultContent_buttonBack" style="color:Red;font-weight:bold;width:90px;-webkit-user-select:none;">
+		<div class="dxb">
+			<div class="dxb-hbc">
+				<input id="ctl00_DefaultContent_buttonBack_I" title="Back to Filer Search page" class="dxb-hb" value="Back" type="button" name="ctl00$DefaultContent$buttonBack" readonly="readonly" />
+			</div><span class="dx-vam">Back</span>
+		</div>
+	</div><script id="dxss_1228258035" type="text/javascript">
+<!--
+ASPx.AddHoverItems('ctl00_DefaultContent_buttonBack',[[['dxbButtonHover'],[''],[''],['','TC']]]);
+ASPx.AddPressedItems('ctl00_DefaultContent_buttonBack',[[['dxbButtonPressed'],[''],[''],['','TC']]]);
+ASPx.AddDisabledItems('ctl00_DefaultContent_buttonBack',[[['dxbDisabled'],[''],[''],['','TC']]]);
+ASPx.AddSelectedItems('ctl00_DefaultContent_buttonBack',[[['dxbf'],[''],['CD']]]);
+
+var dxo = new ASPxClientButton('ctl00_DefaultContent_buttonBack');
+dxo.InitGlobalVariable('ctl00_DefaultContent_buttonBack');
+dxo.SetProperties({
+	'autoPostBack':true,
+	'uniqueID':'ctl00$DefaultContent$buttonBack',
+	'serverEvents':['Click'],
+	'useSubmitBehavior':false,
+	'autoPostBackFunction':function(postBackArg) { __doPostBack("ctl00$DefaultContent$buttonBack", postBackArg); },
+	'causesValidation':false
+});
+dxo.SetEvents({
+	'Click':function(s, e) {if (preventDoubleSubmiting(e)){return;}}
+});
+dxo.AfterCreate();
+
+//-->
+</script>                      
+        </div>
+        
+
+</div>
+<table class="dxgvControl_Glass dxgv" cellspacing="0" cellpadding="0" id="ctl00_DefaultContent_transactionExportGrid" border="0" style="width:100%;border-collapse:collapse;border-collapse:separate;display:none;">
+	<tr>
+		<td><table id="ctl00_DefaultContent_transactionExportGrid_DXMainTable" class="dxgvTable_Glass" cellspacing="0" cellpadding="0" onclick="ASPx.GTableClick(&#39;ctl00_DefaultContent_transactionExportGrid&#39;, event);" ondblclick="ASPx.GVTableDblClick(&#39;ctl00_DefaultContent_transactionExportGrid&#39;, event);" oncontextmenu="return ASPx.GVContextMenu(&#39;ctl00_DefaultContent_transactionExportGrid&#39;,event);" border="0" style="width:100%;border-collapse:collapse;empty-cells:show;">
+			<tr id="ctl00_DefaultContent_transactionExportGrid_DXHeadersRow0">
+				<td id="ctl00_DefaultContent_transactionExportGrid_emptyheader" class="dxgvHeaderPanel_Glass" style="width:0.1%;">Drag a column here...</td>
+			</tr><tr id="ctl00_DefaultContent_transactionExportGrid_DXEmptyRow" class="dxgvEmptyDataRow_Glass">
+				<td class="dxgv" style="border-bottom-width:0px;"><div>
+					No data to display
+				</div></td>
+			</tr>
+		</table><table id="ctl00_DefaultContent_transactionExportGrid_LP" class="dxgvLoadingPanel_Glass" cellspacing="0" cellpadding="0" border="0" style="background-color:Transparent;border-width:0px;border-collapse:collapse;left:0px;top:0px;z-index:30000;display:none;">
+			<tr>
+				<td class="dx" style="padding-left:0px;padding-right:0px;padding-top:0px;padding-bottom:0px;"><img class="dxlp-imgPosLeft" src="../App_Themes/Glass/Images/progress/Loading2.gif" alt="" align="middle" /></td>
+			</tr>
+		</table><div id="ctl00_DefaultContent_transactionExportGrid_LD" class="dxgvLoadingDiv_Glass" style="display:none;z-index:29999;position:absolute;">
+
+		</div><img id="ctl00_DefaultContent_transactionExportGrid_IADD" class="dxGridView_gvDragAndDropArrowDown_Glass" src="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=1_35-GZbYe" alt="|" style="position:absolute;visibility:hidden;top:-100px;" /><img id="ctl00_DefaultContent_transactionExportGrid_IADU" class="dxGridView_gvDragAndDropArrowUp_Glass" src="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=1_35-GZbYe" alt="|" style="position:absolute;visibility:hidden;top:-100px;" /><img id="ctl00_DefaultContent_transactionExportGrid_IADL" class="dxGridView_gvDragAndDropArrowLeft_Glass" src="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=1_35-GZbYe" alt="|" style="position:absolute;visibility:hidden;top:-100px;" /><img id="ctl00_DefaultContent_transactionExportGrid_IADR" class="dxGridView_gvDragAndDropArrowRight_Glass" src="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=1_35-GZbYe" alt="|" style="position:absolute;visibility:hidden;top:-100px;" /><img id="ctl00_DefaultContent_transactionExportGrid_IDHF" class="dxGridView_gvDragAndDropHideColumn_Glass" src="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=1_35-GZbYe" alt="Hide" style="position:absolute;visibility:hidden;top:-100px;" /></td>
+	</tr>
+</table><script id="dxss_1002482794" type="text/javascript">
+<!--
+
+var dxo = new ASPxClientGridView('ctl00_DefaultContent_transactionExportGrid');
+dxo.InitGlobalVariable('transactionExportGrid');
+dxo.SetProperties({
+	'callBack':function(arg) { WebForm_DoCallback('ctl00$DefaultContent$transactionExportGrid',arg,ASPx.Callback,'ctl00_DefaultContent_transactionExportGrid',ASPx.CallbackError,true); },
+	'uniqueID':'ctl00$DefaultContent$transactionExportGrid',
+	'clientVisible':false,
+	'stateObject':{
+		'keys':[],
+		'callbackState':'6jVsirJQpHJy57g4s18vSIXn0f7an4sW++EcqxmMdTEOCWjhAThOEbRfWoDYpHvCXO4WElaEsidMYgLG0VKAPkYEq/98ljC5kKKiyyT9A3K3mgqiD04tfK2Al52YdtZ/xtiMDCcROXiQTdCSlxyswrcB1U2ofLKpGTVioNZUU2aTcrfB2LicWnSZBHlM4WJEJB4Hxt8kN8Wvuh+8xsuFJ1JmkpRB0yH/H96aQOVeKP+lTZ/gvG+3UhTOXrg3Qksn',
+		'selection':''
+	},
+	'callBacksEnabled':false,
+	'pageRowCount':0,
+	'pageRowSize':10,
+	'pageIndex':0,
+	'pageCount':0,
+	'selectedWithoutPageRowCount':0,
+	'visibleStartIndex':0,
+	'focusedRowIndex':-1,
+	'allowFocusedRow':false,
+	'allowSelectByItemClick':false,
+	'allowSelectSingleRowOnly':false,
+	'callbackOnFocusedRowChanged':false,
+	'callbackOnSelectionChanged':false,
+	'editState':0,
+	'editItemVisibleIndex':-1,
+	'searchPanelFilter':'',
+	'allowDelete':true,
+	'allowEdit':true,
+	'allowInsert':true,
+	'columnProp':[],
+	'editMode':2,
+	'indentColumnCount':0,
+	'allowChangeColumnHierarchy':false,
+	'allowMultiColumnAutoFilter':false
+});
+dxo.AfterCreate();
+
+//-->
+</script><script id="dxss_498220100" type="text/javascript">
+<!--
+ASPxClientGridBase.PostponeInitialize('ctl00_DefaultContent_transactionExportGrid',({
+	'commandButtonIDs':[],
+	'styleInfo':{
+		'sel':{'css':'dxgvSelectedRow_Glass'},
+		'fi':{'css':'dxgvFocusedRow_Glass'},
+		'ei':'<tr class="dxgvEditingErrorRow_Glass">\r\n\t<td class="dxgv" data-colSpan="1" style="border-right-width:0px;"></td>\r\n</tr>',
+		'fc':{'css':'dxgvFocusedCell_Glass'},
+		'bec':{'css':'dxgvBatchEditCell_Glass dx-wrap dxgv'},
+		'bemc':{'css':'dxgvBatchEditModifiedCell_Glass dx-wrap dxgv'},
+		'bemergmc':{'css':'dxgvBatchEditModifiedCell_Glass dxgvBatchEditCell_Glass dx-wrap dxgv'},
+		'bedi':{'css':'dxgvBatchEditDeletedItem_Glass dxgv'},
+		'fgi':{'css':'dxgvFocusedGroupRow_Glass'}
+	}
+}))
+//-->
+</script>
+    
+
+    <div class="dxbButton_Glass dxbButtonSys dxbTSys" id="ctl00_DefaultContent_BtnTemp" style="display:none;-webkit-user-select:none;">
+	<div class="dxb">
+		<div class="dxb-hbc">
+			<input id="ctl00_DefaultContent_BtnTemp_I" class="dxb-hb" value="submit" type="submit" name="ctl00$DefaultContent$BtnTemp" readonly="readonly" />
+		</div><span class="dx-vam">&nbsp;</span>
+	</div>
+</div><script id="dxss_984222688" type="text/javascript">
+<!--
+ASPx.AddHoverItems('ctl00_DefaultContent_BtnTemp',[[['dxbButtonHover_Glass'],[''],[''],['','TC']]]);
+ASPx.AddPressedItems('ctl00_DefaultContent_BtnTemp',[[['dxbButtonPressed_Glass'],[''],[''],['','TC']]]);
+ASPx.AddDisabledItems('ctl00_DefaultContent_BtnTemp',[[['dxbDisabled_Glass'],[''],[''],['','TC']]]);
+ASPx.AddSelectedItems('ctl00_DefaultContent_BtnTemp',[[['dxbf'],[''],['CD']]]);
+
+var dxo = new ASPxClientButton('ctl00_DefaultContent_BtnTemp');
+dxo.InitGlobalVariable('BtnTemp');
+dxo.SetProperties({
+	'autoPostBack':true,
+	'uniqueID':'ctl00$DefaultContent$BtnTemp',
+	'clientVisible':false,
+	'serverEvents':['Click'],
+	'isTextEmpty':true
+});
+dxo.SetEvents({
+	'Click':function(s, e) {if (preventDoubleSubmiting(e)){return;}}
+});
+dxo.AfterCreate();
+
+//-->
+</script>
+    <input type="hidden" id="hdn_visibleIndex" name="hdn_visibleIndex" />
+                               
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="width:100%;">
+                                    
+    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="height: 10px;" colspan="2">
+                                <!--separation between main part and footer-->
+                                <span id="ctl00_panelMasterBottom">                    
+                                </span>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td style="height: 25px;" colspan="2">
+                               <!--Footer-->
+                                <table cellpadding="0" cellspacing="0" style="height: 25px; width:100%; background-color: #7fb2c4;border-style:none; border-top-width:2px; border-top-color:#2d6785; border-top-style:NONE;">
+                                    <tr>
+                                        <td style="vertical-align: middle; text-align: right;">
+                                            <div style="width: 100%; height: 25px; overflow:hidden; text-align:left; vertical-align:middle; color: #ffffff; font-size:11px;">
+                                                <table cellpadding="0" cellspacing="0" style="height: 100%; width:100%; color:#333333;  font-style:normal; font-size:12px; padding-left:20px; padding-right:5px;">
+                                                    <tr>
+                                                        <td style="vertical-align: middle; text-align: left;">
+                                                        
+                                                        </td>
+                                                        <td style="vertical-align: middle; text-align: center; ">
+                                                        <span style="font-weight:bold;">CampaignDocs eRetrieval&trade;</span>&nbsp;&nbsp;Version 2.18.1212&nbsp;&nbsp;|&nbsp;&nbsp;Copyright  2007-2019 SouthTech Systems,&nbsp;Inc.&nbsp;&nbsp;All rights reserved.&nbsp;&nbsp;
+                                                        </td>
+                                                        <td style="vertical-align: middle; text-align: right;">
+                                                            
+                                                        </td>
+                                                    </tr>
+                                                </table>                                    
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td style="height: 5px;" colspan="2">
+                                <!--separation between footer and bottom-->
+                                <div style="height:5px;overflow:hidden; display:inline;"></div>
+                            </td>
+                        </tr>
+                    </table>
+        
+                </td>
+            </tr>
+        </table>   
+
+        <span style="height:0px; width:0px; border-top-style:none;border-right-style:none;border-bottom-style:none;border-left-style:none;margin-top:0px; margin-right:0px;margin-bottom:0px;margin-left:0px; padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px; overflow:hidden;">
+        
+
+        </span>
+
+        <div id="ctl00_popup_PW-1" class="dxpcLite_Glass dxpclW" style="width:200px;cursor:default;z-index:10000;display:none;visibility:hidden;">
+	<div class="dxpc-mainDiv dxpc-shadow">
+		<div class="dxpc-header" style="cursor:move;padding-left:10px;padding-right:6px;padding-top:1px;-webkit-user-select:none;">
+			<div class="dxpc-headerContent">
+				<span class="dxpc-headerText dx-vam">Header</span>
+			</div><b class="dx-clear"></b>
+		</div><div class="dxpc-contentWrapper">
+			<div class="dxpc-content">
+				
+                <div style="vertical-align:middle; width:auto; white-space:normal;" id="PopUpDiv">
+                   
+                </div>
+            
+			</div>
+		</div>
+	</div>
+</div><table id="ctl00_popup_LP" class="dxpcLoadingPanel_Glass dxlpLoadingPanel_Glass" cellspacing="0" cellpadding="0" border="0" style="border-collapse:collapse;left:0px;top:0px;z-index:30000;display:none;">
+	<tr>
+		<td class="dx" style="padding-right:0px;"><img class="dxlp-imgPosLeft" src="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=0_984-UZbYe" alt="" align="middle" /></td><td class="dx" style="padding-left:0px;"><span id="ctl00_popup_TL">Loading&hellip;</span></td>
+	</tr>
+</table><div id="ctl00_popup_LD" class="dxpcLoadingDiv_Glass dxlpLoadingDiv_Glass dx-ft" style="left:0px;top:0px;z-index:29999;display:none;position:absolute;">
+
+</div><script id="dxss_930468773" type="text/javascript">
+<!--
+
+var dxo = new ASPxClientPopupControl('ctl00_popup');
+dxo.InitGlobalVariable('popup');
+dxo.SetProperties({
+	'callBack':function(arg) { WebForm_DoCallback('ctl00$popup',arg,ASPx.Callback,'ctl00_popup',ASPx.CallbackError,true); },
+	'uniqueID':'ctl00$popup',
+	'popupAnimationType':'slide',
+	'popupHorizontalAlign':'OutsideRight',
+	'isPopupPositionCorrectionOn':false,
+	'allowDragging':true
+});
+dxo.AfterCreate();
+
+//-->
+</script>
+    <span id="ctl00_GenericPopup"><div id="ctl00_GenericPopup_InnerPopupControl_PW-1" class="dxpcLite_Glass dxpclW" style="width:200px;cursor:default;z-index:10000;display:none;visibility:hidden;">
+	<div class="dxpc-mainDiv dxpc-shadow">
+		<div class="dxpc-header dxpc-withBtn" style="cursor:move;padding-left:10px;padding-right:6px;padding-top:1px;-webkit-user-select:none;">
+			<div class="dxpc-closeBtn">
+				<img class="dxWeb_pcCloseButton_Glass" src="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=1_35-GZbYe" alt="Close" />
+			</div><div class="dxpc-headerContent">
+				<span class="dxpc-headerText dx-vam">Header</span>
+			</div><b class="dx-clear"></b>
+		</div><div class="dxpc-contentWrapper">
+			<div class="dxpc-content">
+				&nbsp;&nbsp;
+			</div>
+		</div>
+	</div>
+</div><div id="ctl00_GenericPopup_InnerPopupControl_DXPWMB-1" class="dxpcModalBackLite_Glass" style="z-index:9999;">
+
+</div><table id="ctl00_GenericPopup_InnerPopupControl_LP" class="dxpcLoadingPanel_Glass dxlpLoadingPanel_Glass" cellspacing="0" cellpadding="0" border="0" style="border-collapse:collapse;left:0px;top:0px;z-index:30000;display:none;">
+	<tr>
+		<td class="dx" style="padding-right:0px;"><img class="dxlp-imgPosLeft" src="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=0_984-UZbYe" alt="" align="middle" /></td><td class="dx" style="padding-left:0px;"><span id="ctl00_GenericPopup_InnerPopupControl_TL">Loading&hellip;</span></td>
+	</tr>
+</table><div id="ctl00_GenericPopup_InnerPopupControl_LD" class="dxpcLoadingDiv_Glass dxlpLoadingDiv_Glass dx-ft" style="left:0px;top:0px;z-index:29999;display:none;position:absolute;">
+
+</div><script id="dxss_1123866450" type="text/javascript">
+<!--
+ASPx.AddHoverItems('ctl00_GenericPopup_InnerPopupControl',[[['dxpc-closeBtnHover'],[''],['HCB-1']]]);
+
+var dxo = new ASPxClientPopupControl('ctl00_GenericPopup_InnerPopupControl');
+dxo.InitGlobalVariable('GenericPopupInnerPopupControl');
+dxo.SetProperties({
+	'callBack':function(arg) { WebForm_DoCallback('ctl00$GenericPopup_InnerPopupControl',arg,ASPx.Callback,'ctl00_GenericPopup_InnerPopupControl',ASPx.CallbackError,true); },
+	'uniqueID':'ctl00$GenericPopup_InnerPopupControl',
+	'popupAnimationType':'fade',
+	'closeOnEscape':true,
+	'popupHorizontalAlign':'WindowCenter',
+	'popupVerticalAlign':'WindowCenter',
+	'isPopupPositionCorrectionOn':false,
+	'allowDragging':true
+});
+dxo.SetEvents({
+	'Init':function(s, e) { 
+                                                                            var popup = GetControlInstance('GenericPopup', 'InnerPopupControl');
+                                                                            window.GenericPopup = popup;
+                                                                            //popup.context = InitCustomPopup(popup);
+                                                                      },
+	'PopUp':function(s, e) {    
+                                                                            var popup = GetControlInstance('GenericPopup', 'InnerPopupControl');
+                                                                            popup.context = InitCustomPopup(popup);
+                                                                            popup.context.OnPopup(s, e);
+                                                                      }
+});
+dxo.AfterCreate();
+
+//-->
+</script><table class="dxlpLoadingPanel_Glass dxlpControl_Glass" cellspacing="0" cellpadding="0" id="ctl00_LoadingPanelCustomPopup" border="0" style="background-color:Transparent;border-style:None;border-collapse:collapse;position:absolute;left:0px;top:0px;z-index:30000;display:none;">
+	<tr>
+		<td class="dx" style="padding-left:0px;padding-right:0px;padding-top:0px;padding-bottom:0px;"><img class="dxlp-imgPosLeft" src="../App_Themes/Glass/Images/progress/Loading2.gif" alt="" align="middle" /></td>
+	</tr>
+</table><div id="ctl00_LoadingPanelCustomPopup_LD" class="dxlpLoadingDiv_Glass dxlpControl_Glass dx-ft" style="opacity:0.2;left:0px;top:0px;z-index:29999;display:none;position:absolute;">
+
+</div><script id="dxss_379666878" type="text/javascript">
+<!--
+
+var dxo = new ASPxClientLoadingPanel('ctl00_LoadingPanelCustomPopup');
+dxo.InitGlobalVariable('loadingPanel');
+dxo.SetProperties({'uniqueID':'ctl00$LoadingPanelCustomPopup','isTextEmpty':true});
+dxo.AfterCreate();
+
+//-->
+</script></span><span id="ctl00_GenericPopupSizeable"><div id="ctl00_GenericPopupSizeable_InnerPopupControl_PW-1" class="dxpcLite_Glass dxpclW" style="width:200px;cursor:default;z-index:10000;display:none;visibility:hidden;">
+	<div class="dxpc-mainDiv dxpc-shadow">
+		<div class="dxpc-header dxpc-withBtn" style="cursor:move;padding-left:10px;padding-right:6px;padding-top:1px;-webkit-user-select:none;">
+			<div class="dxpc-closeBtn">
+				<img class="dxWeb_pcCloseButton_Glass" src="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=1_35-GZbYe" alt="Close" />
+			</div><div class="dxpc-headerContent">
+				<span class="dxpc-headerText dx-vam">Header</span>
+			</div><b class="dx-clear"></b>
+		</div><div class="dxpc-contentWrapper">
+			<div class="dxpc-content">
+				&nbsp;&nbsp;
+			</div>
+		</div><div class="dxpc-footer">
+			<div class="dxpc-footerContent" style="padding-left:0px;padding-right:0px;padding-top:0px;padding-bottom:0px;">
+
+			</div><img class="dxpc-sizeGrip dxWeb_pcSizeGrip_Glass" src="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=1_35-GZbYe" alt="Resize" /><b class="dx-clear"></b>
+		</div>
+	</div>
+</div><div id="ctl00_GenericPopupSizeable_InnerPopupControl_DXPWMB-1" class="dxpcModalBackLite_Glass" style="z-index:9999;">
+
+</div><table id="ctl00_GenericPopupSizeable_InnerPopupControl_LP" class="dxpcLoadingPanel_Glass dxlpLoadingPanel_Glass" cellspacing="0" cellpadding="0" border="0" style="border-collapse:collapse;left:0px;top:0px;z-index:30000;display:none;">
+	<tr>
+		<td class="dx" style="padding-right:0px;"><img class="dxlp-imgPosLeft" src="/SanJoseCity/CampaignDocsWebRetrieval/DXR.axd?r=0_984-UZbYe" alt="" align="middle" /></td><td class="dx" style="padding-left:0px;"><span id="ctl00_GenericPopupSizeable_InnerPopupControl_TL">Loading&hellip;</span></td>
+	</tr>
+</table><div id="ctl00_GenericPopupSizeable_InnerPopupControl_LD" class="dxpcLoadingDiv_Glass dxlpLoadingDiv_Glass dx-ft" style="left:0px;top:0px;z-index:29999;display:none;position:absolute;">
+
+</div><script id="dxss_1556832057" type="text/javascript">
+<!--
+ASPx.AddHoverItems('ctl00_GenericPopupSizeable_InnerPopupControl',[[['dxpc-closeBtnHover'],[''],['HCB-1']]]);
+
+var dxo = new ASPxClientPopupControl('ctl00_GenericPopupSizeable_InnerPopupControl');
+dxo.InitGlobalVariable('GenericPopupSizeableInnerPopupControl');
+dxo.SetProperties({
+	'callBack':function(arg) { WebForm_DoCallback('ctl00$GenericPopupSizeable_InnerPopupControl',arg,ASPx.Callback,'ctl00_GenericPopupSizeable_InnerPopupControl',ASPx.CallbackError,true); },
+	'uniqueID':'ctl00$GenericPopupSizeable_InnerPopupControl',
+	'popupAnimationType':'fade',
+	'allowResize':true,
+	'closeOnEscape':true,
+	'popupHorizontalAlign':'WindowCenter',
+	'popupVerticalAlign':'WindowCenter',
+	'isPopupPositionCorrectionOn':false,
+	'allowDragging':true
+});
+dxo.SetEvents({
+	'Init':function(s, e) { 
+                                                                            var popup = GetControlInstance('GenericPopupSizeable', 'InnerPopupControl');
+                                                                            window.GenericPopupSizeable = popup;
+                                                                            //popup.context = InitCustomPopup(popup);
+                                                                      },
+	'PopUp':function(s, e) {    
+                                                                            var popup = GetControlInstance('GenericPopupSizeable', 'InnerPopupControl');
+                                                                            popup.context = InitCustomPopup(popup);
+                                                                            popup.context.OnPopup(s, e);
+                                                                      }
+});
+dxo.AfterCreate();
+
+//-->
+</script></span>
+
+<script language=JavaScript id='PreventButtonDoubleSubmiting'>
+function preventDoubleSubmiting(e){ 
+if(typeof(Sys) == 'undefined') return; 
+var prm = Sys.WebForms.PageRequestManager.getInstance();
+if (prm && prm.get_isInAsyncPostBack()){e.processOnServer = false;return true;}
+return false;
+}
+</script><script type='text/javascript'>new Sys.WebForms.Menu({ element: 'ctl00_roundpaneFormMainSearch_Menu1', disappearAfter: 500, orientation: 'vertical', tabIndex: 0, disabled: false });</script>
+<script type="text/javascript">
+//<![CDATA[
+
+var callBackFrameUrl='/SanJoseCity/CampaignDocsWebRetrieval/WebResource.axd?d=uzmg-C4FNaozGaW1peinLHDPEm5bE0hS3bM4YtQDmLkwkG7L01uZn5HXpxU3VJURQHkyW7Y82D5Xa2D74nBL9L8TTEAbFfG19O2WESKNHzU1&t=636765211280000000';
+WebForm_InitCallback();//]]>
+</script>
+</form>
+</body>
+</html>
+
+<table class="dxlpLoadingPanel_Glass dxlpControl_Glass" cellspacing="0" cellpadding="0" id="PageUpdateLoadingPanel" border="0" style="background-color:Transparent;border-style:None;border-collapse:collapse;position:absolute;left:0px;top:0px;z-index:30000;display:none;">
+	<tr>
+		<td class="dx" style="padding-left:0px;padding-right:0px;padding-top:0px;padding-bottom:0px;"><img class="dxlp-imgPosLeft" src="../App_Themes/Glass/Images/progress/Loading2.gif" alt="" align="middle" /></td>
+	</tr>
+</table><div id="PageUpdateLoadingPanel_LD" class="dxlpLoadingDiv_Glass dxlpControl_Glass dx-ft" style="opacity:0.2;left:0px;top:0px;z-index:29999;display:none;position:absolute;">
+
+</div><script id="dxss_386466288" type="text/javascript">
+<!--
+
+var dxo = new ASPxClientLoadingPanel('PageUpdateLoadingPanel');
+dxo.InitGlobalVariable('pageUpdateLoadingPanelClient');
+dxo.SetProperties({'cpHideOnPageLoaded':true,'isTextEmpty':true});
+dxo.AfterCreate();
+
+//-->
+</script><script type="text/javascript" src="/SanJoseCity/CampaignDocsWebRetrieval/WebResource.axd?d=zTsj3FTazuVrle5iWpMmNZInttpsunU8wHxJNft_AW5Icb4TP7sbqI1ohF8-derXlWyTBeal0SyDwc5D8LoKyJUhbrNjv-1DmFaP75PdSPLghdX9SN0G5mvLkzMswScYTDX7EFPk8u5HJuZB_RzF5w2&amp;t=636802287840000000&amp;v=2.18.1212"></script><script type="text/javascript">UpdateProgress.showLoadingPanel();</script>
