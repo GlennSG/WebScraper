@@ -2,6 +2,7 @@ import os
 import re
 import sys
 import shutil
+import time
 import multiprocessing
 from multiprocessing.dummy import Pool
 from selenium.webdriver.common.action_chains import ActionChains
@@ -66,12 +67,6 @@ class Scraper():
     def __iterForms(self,driver):
         forms = driver.find_elements_by_xpath('//a[@class="dxbButton_Glass dxgvCommandColumnItem_Glass dxgv__cci dxbButtonSys"]')
         sleep(self.s)
-        top_form_xpath = driver.find_elements_by_xpath('//tr[@class="dxgvDataRow_Glass"]')
-        bottom_form_xpath = driver.find_elements_by_xpath('//tr[@class="dxgvDataRow_Glass dxgvLVR"]')
-        data = [row for row in top_form_xpath]
-        if bottom_form_xpath:
-            data.append(bottom_form_xpath[0])
-        data_text = [info.text for info in data]
 
         for ind, form in enumerate(forms):
             sleep(self.s + 1)
@@ -82,27 +77,10 @@ class Scraper():
             self.__downloadExcel(driver)
             self.__downloadPdfs(driver)
 
-            self.__orgFiles(ind,data_text)
-
             # Go back a page
             self.__clickBackButton(driver)
             sleep(self.s)
 
-
-    def __orgFiles(self,ind,text):
-        # create new folder for storing pdfs/excel files for certain group
-        raw_str = text[ind]
-        new_path = self.path_dir
-        clean_str = re.sub('[^A-Za-z0-9]+', '', raw_str)[:175].lower()
-        add_new_folder = os.path.join(new_path, clean_str)
-
-        if not os.path.exists(add_new_folder):
-            os.makedirs(add_new_folder)
-
-        root_dst_dir = add_new_folder
-        files = [f for f in os.listdir(new_path) if os.path.isfile(os.path.join(new_path, f))]
-        for file in files:
-            shutil.move(os.path.join(new_path, file), root_dst_dir)
 
     def __clickSubmitButton(self,driver):
         driver.find_element_by_xpath('//*[@id="ctl00_DefaultContent_ASPxRoundPanel1_btnFindFilers_CD"]').click()
@@ -113,11 +91,11 @@ class Scraper():
         else:
             driver.find_elements_by_xpath('//*[@id="ctl00_DefaultContent_buttonBack_CD"]')[0].click()
 
-    def __downloadCheck(self):
+    def downloadCheck(self):
         for i in os.listdir(self.path_dir):
             if ".crdownload" in i:
                 sleep(0.5)
-                self.__downloadCheck()
+                self.downloadCheck()
 
     def __downloadExcel(self,driver):
         excel = driver.find_elements_by_xpath('//td[@class="dxgvCommandColumn_Glass dxgv"]//img[@title="Export Transaction Details To Excel"]')
@@ -146,12 +124,14 @@ class Scraper():
             driver.switch_to.default_content()
             driver.find_elements_by_xpath("//div[@id='ctl00_GenericPopupSizeable_InnerPopupControl_PWH-1']")[0].click()
             ActionChains(driver).send_keys(Keys.ESCAPE).perform()
-            self.__downloadCheck()
+            self.downloadCheck()
             sleep(self.s+2)
 
+start_time = time.time()
 s = Scraper()
 s.setUpScrapers()
 s.startScrapers()
+print("--- {} seconds ---".format(time.time()-start_time))
 '''
 Grab all page links on bottom (9) and store in a list (inside Scraper() class)
 Have scraper class just pull info from each individual page (don't worry about while loops)
