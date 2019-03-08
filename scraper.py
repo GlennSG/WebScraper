@@ -15,21 +15,21 @@ from selenium.common.exceptions import TimeoutException
 from time import sleep
 from dircreator import DirCreator
 
-sleeper = 1
-
 class Scraper():
     def __init__(self):
+		# create data folder in current directory to store files
         new_dir = DirCreator()
         new_dir.createFolder()
         self.path_dir = new_dir.changeDirectory()
-
+		
+		# time to sleep()
         self.s = 1
 
         self.drivers = []
-        self.text = []
         self.driver = None
 
     def setUpScrapers(self):
+		# create drivers for each page on site 
         self.__initDrivers()
         sleep(self.s+2)
         pg_nums = self.driver.find_elements_by_xpath('//a[@class="dxp-num"]')
@@ -40,12 +40,17 @@ class Scraper():
             self.driver.find_element_by_xpath('//a[contains(text(),"{}")]'.format(num + 1)).click()
             if num <= len(pg_nums):
                 num += 1
+				
+	def startScrapers(self):
+		# initiate drivers simultaneously (equal to total # of cpu processors -1)
+        p = Pool(multiprocessing.cpu_count()-1)
+        p.map(self.__iterForms,self.drivers)
 
     def __initDrivers(self):
         options = webdriver.ChromeOptions()
-        # options.add_argument('headless')
-        # options.add_argument('--ignore-certificate-errors')
-        # options.add_argument('--test_type')
+        options.add_argument('headless')
+        options.add_argument('--ignore-certificate-errors')
+        options.add_argument('--test_type')
         plugs = {"enabled":False,"name":"Chrome PDF Viewer"}
         prefs = {"download.default_directory": self.path_dir, "plugins.plugins_list": [plugs]}
         options.add_experimental_option("prefs", prefs)
@@ -58,11 +63,6 @@ class Scraper():
 
         self.__clickSubmitButton(self.driver)
         self.drivers.append(self.driver)
-
-    def startScrapers(self):
-        p = Pool(multiprocessing.cpu_count()-1)
-        p.map(self.__iterForms,self.drivers)
-
 
     def __iterForms(self,driver):
         forms = driver.find_elements_by_xpath('//a[@class="dxbButton_Glass dxgvCommandColumnItem_Glass dxgv__cci dxbButtonSys"]')
@@ -92,6 +92,7 @@ class Scraper():
             driver.find_elements_by_xpath('//*[@id="ctl00_DefaultContent_buttonBack_CD"]')[0].click()
 
     def downloadCheck(self):
+		# checks if pdfs are finished downloading (some take longer than others)
         for i in os.listdir(self.path_dir):
             if ".crdownload" in i:
                 sleep(0.5)
@@ -132,13 +133,3 @@ s = Scraper()
 s.setUpScrapers()
 s.startScrapers()
 print("--- {} seconds ---".format(time.time()-start_time))
-'''
-Grab all page links on bottom (9) and store in a list (inside Scraper() class)
-Have scraper class just pull info from each individual page (don't worry about while loops)
-Create a new instance of Scraper() for each page
-Use threading/parallel programming for each instance of Scraper() --> run 9 scrapers simultaneously
-
-Need to update pdf downloader to work with FireFox
-Need to rework the auto downloader to automatically download files to data folder (files are not downloading into respective
-folder, need to make it so files download to the right folder after downloading fully)
-'''
