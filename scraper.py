@@ -43,8 +43,8 @@ class Scraper():
 				
 	def startScrapers(self):
 		# initiate drivers simultaneously (equal to total # of cpu processors -1)
-        p = Pool(multiprocessing.cpu_count()-1)
-        p.map(self.__iterForms,self.drivers)
+		p = Pool(multiprocessing.cpu_count()-1)
+		p.map(self.__iterForms,self.drivers)
 
     def __initDrivers(self):
         options = webdriver.ChromeOptions()
