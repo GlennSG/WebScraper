@@ -24,7 +24,7 @@ class Scraper():
         self.path_dir = new_dir.changeDirectory()
 
         # time to sleep()
-        self.s = 1
+        self.s = 2
 
         self.drivers = []
         self.driver = None
@@ -49,18 +49,33 @@ class Scraper():
 
     def __initDrivers(self):
         options = webdriver.ChromeOptions()
-        options.add_argument('headless')
-        options.add_argument('--ignore-certificate-errors')
-        options.add_argument('--test_type')
+        #options.headless = True
+        options.add_argument("--ignore-certificate-errors")
+        options.add_argument("--test_type")
+        options.add_argument('--no-sandbox')
+        options.add_argument('start-maximized')
+        options.add_argument('disable-infobars')
+        options.add_argument("--disable-extensions")
         plugs = {"enabled": False, "name": "Chrome PDF Viewer"}
-        prefs = {"download.default_directory": self.path_dir, "plugins.plugins_list": [plugs]}
+        prefs = {"download.default_directory": self.path_dir,
+                 'download.prompt_for_download': False,
+                 'download.directory_upgrade': True,
+                 'safebrowsing.enabled': False,
+                 'safebrowsing.disable_download_protection': True,
+                 "plugins.plugins_list": [plugs]}
         options.add_experimental_option("prefs", prefs)
         self.driver = webdriver.Chrome(options=options)
+
+        # bypass chromedriver headless security
+        # self.driver.command_executor._commands["send_command"] = ("POST", '/session/$sessionId/chromium/send_command')
+        # params = {'cmd': 'Page.setDownloadBehavior', 'params': {'behavior': 'allow', 'downloadPath': self.path_dir}}
+        # self.driver.execute("send_command", params)
+
         self.driver.get(
-            "https://www.southtechhosting.com/SanJoseCity/CampaignDocsWebRetrieval/Search/SearchByElection.aspx")
+        "https://www.southtechhosting.com/SanJoseCity/CampaignDocsWebRetrieval/Search/SearchByElection.aspx")
         try:
             WebDriverWait(self.driver, 10).until(
-                EC.presence_of_element_located((By.ID, 'ctl00_DefaultContent_ASPxRoundPanel1_btnFindFilers_CD')))
+            EC.presence_of_element_located((By.ID, 'ctl00_DefaultContent_ASPxRoundPanel1_btnFindFilers_CD')))
         except TimeoutException:
             print("Loading took too long.")
 
